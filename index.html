@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071a22">
+<title>OptiLauncher — Установка</title>
+<style>
+:root{
+  --bg:#07171f;--text:#effbf6;--muted:#a2b8b9;--mint:#78f3b5;--mint2:#40d99b;
+  --glass:rgba(177,235,222,.075);--glass2:rgba(177,235,222,.12);--stroke:rgba(205,255,239,.17);
+  --shadow:0 24px 70px rgba(0,0,0,.34)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;color:var(--text);
+  font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(ellipse at 12% 5%,rgba(38,191,143,.2),transparent 36%),
+    radial-gradient(ellipse at 92% 20%,rgba(65,143,198,.19),transparent 34%),
+    radial-gradient(ellipse at 50% 100%,rgba(31,105,110,.18),transparent 42%),
+    linear-gradient(135deg,#06151d,#0a2029 55%,#0b1926);
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.18;
+ background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+ background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 85%)
+}
+.orb{position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);pointer-events:none;opacity:.38;animation:float 13s ease-in-out infinite}
+.orb.one{width:310px;height:310px;left:-130px;top:34%;background:radial-gradient(circle at 35% 35%,#65f0b3,transparent 70%)}
+.orb.two{width:390px;height:390px;right:-180px;top:54%;background:radial-gradient(circle at 40% 40%,#4f9acb,transparent 70%);animation-delay:-5s}
+@keyframes float{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(24px,-35px,0) scale(1.08)}}
+@keyframes appear{from{opacity:0;transform:translateY(22px) scale(.985);filter:blur(7px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes shimmer{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(220%) skewX(-18deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(120,243,181,.35)}50%{box-shadow:0 0 0 8px rgba(120,243,181,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.shell{max-width:1180px;margin:24px auto;padding:0 20px}
+.glass{
+ background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.035));
+ border:1px solid var(--stroke);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.12);
+ backdrop-filter:blur(22px) saturate(145%);-webkit-backdrop-filter:blur(22px) saturate(145%);
+}
+.topbar{height:62px;border-radius:19px;display:flex;align-items:center;justify-content:space-between;padding:0 19px;animation:appear .7s both}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.15px}
+.logo{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;color:#073a2b;font-weight:1000;font-size:19px;
+ background:linear-gradient(145deg,#a1ffd0,#41d99b);box-shadow:0 5px 22px #55e6a544,inset 0 1px 0 #fff9}
+.brand small{font-weight:500;color:#a8babb}
+.topright{display:flex;align-items:center;gap:9px;color:#bfd0ce;font-size:11px}
+.pill{border:1px solid rgba(212,255,241,.15);background:rgba(255,255,255,.055);border-radius:30px;padding:7px 12px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:7px;box-shadow:0 0 12px var(--mint);animation:pulse 2.2s infinite}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:18px;margin-top:18px}
+main,.side{min-width:0}
+.hero{padding:47px 43px 40px;border-radius:26px;position:relative;overflow:hidden;animation:appear .8s .08s both}
+.hero:before{content:"";position:absolute;inset:-1px;background:radial-gradient(ellipse at 85% 12%,rgba(114,255,195,.19),transparent 38%),linear-gradient(120deg,rgba(53,211,158,.07),transparent 55%);pointer-events:none}
+.hero:after{content:"";position:absolute;top:-40%;left:-30%;width:25%;height:180%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.11),transparent);transform:skewX(-18deg);animation:shimmer 8s ease-in-out infinite}
+.hero-content{position:relative;z-index:1}
+.eyebrow{font-size:10px;letter-spacing:2.2px;color:#8ef3bc;font-weight:850}
+h1{font-size:clamp(37px,5.5vw,58px);line-height:1.02;letter-spacing:-2.2px;margin:15px 0 16px;max-width:650px}
+.gradient-text{background:linear-gradient(95deg,#fff 5%,#a5f7cf 55%,#7dc6d9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#b7cbca;max-width:590px;margin:0 0 27px;font-size:14px}
+.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:13px;padding:13px 20px;font-weight:850;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s;display:inline-flex;align-items:center;gap:10px;text-decoration:none;position:relative;overflow:hidden}
+.btn.primary{background:linear-gradient(135deg,#9bffd0,#53dfa0);color:#073a2b;box-shadow:0 9px 28px rgba(64,217,155,.25),inset 0 1px 0 #fff}
+.btn.primary:after{content:"";position:absolute;inset:0 auto 0 -50%;width:35%;background:linear-gradient(90deg,transparent,#ffffff99,transparent);transform:skewX(-20deg);transition:left .6s}
+.btn.primary:hover:after{left:130%}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(61,221,158,.22)}
+.btn.secondary{background:rgba(255,255,255,.07);color:#e7f4ef;border:1px solid rgba(222,255,244,.17);backdrop-filter:blur(12px)}
+.note{font-size:11px;color:#92aaac;margin-top:16px}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:27px 0 13px;gap:10px}
+h2{font-size:22px;margin:0;letter-spacing:-.5px}
+.section-head span{font-size:10px;color:#90a8aa;letter-spacing:1.3px}
+.features,.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feature,.step,.sidecard{
+ border-radius:18px;padding:18px;transition:transform .28s,border-color .28s,background .28s;
+}
+.feature:hover,.step:hover,.sidecard:hover{transform:translateY(-5px);border-color:rgba(137,255,204,.35);background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.045))}
+.feature{animation:appear .65s both}
+.feature:nth-child(2){animation-delay:.12s}.feature:nth-child(3){animation-delay:.24s}
+.ico{width:39px;height:39px;border-radius:13px;background:linear-gradient(145deg,rgba(92,240,177,.22),rgba(92,240,177,.07));border:1px solid rgba(130,255,203,.18);color:var(--mint);display:grid;place-items:center;font-size:20px;margin-bottom:13px}
+.feature b{display:block;font-size:13px;margin-bottom:5px}
+.feature p,.step p{font-size:11px;color:#a0b6b7;margin:0}
+.step-num{font-size:10px;color:var(--mint);font-weight:900;letter-spacing:1.5px;margin-bottom:9px}
+.step b{font-size:13px}
+.step p{margin-top:6px}
+.sidecard{margin-bottom:13px;padding:19px;animation:appear .7s .2s both}
+.sidecard:nth-child(2){animation-delay:.32s}.sidecard:nth-child(3){animation-delay:.44s}
+.side-label{font-size:10px;letter-spacing:1.3px;color:#91a9aa;font-weight:850;margin-bottom:14px}
+.version{font-size:17px;font-weight:850;margin-bottom:4px}
+.muted{color:#9eb4b5;font-size:11px}
+.tag{display:inline-block;border:1px solid rgba(210,255,239,.15);background:rgba(255,255,255,.06);border-radius:7px;padding:4px 7px;font-size:9px;color:#c1d2cf;margin:12px 5px 0 0}
+.status{display:flex;align-items:center;gap:8px;color:#c1d2cf;font-size:11px;margin-top:13px}.status .dot{margin:0}
+.divider{height:1px;background:rgba(220,255,244,.12);margin:15px 0}
+.side-link{color:#91f4bb;text-decoration:none;font-size:11px;font-weight:800}
+.faq{margin-top:24px}
+details{background:rgba(255,255,255,.055);border:1px solid rgba(205,255,239,.13);border-radius:13px;padding:13px 16px;margin-top:9px;color:#e0eee8;font-size:12px;backdrop-filter:blur(16px);transition:background .2s}
+details[open]{background:rgba(255,255,255,.09)}
+summary{cursor:pointer;font-weight:750}
+details p{color:#a4babb;margin:10px 0 2px}
+footer{padding:24px 4px;color:#718b8d;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:13px 18px;border:1px solid var(--stroke);border-radius:14px;background:rgba(11,35,42,.88);backdrop-filter:blur(20px);color:#eaf8f1;box-shadow:var(--shadow);font-size:12px;transition:.3s;z-index:10;max-width:calc(100% - 30px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.sidecard{margin:0}.hero{padding:37px 28px}}
+@media(max-width:560px){.shell{padding:0 12px;margin:12px auto}.topbar{padding:0 12px}.topright .pill:last-child{display:none}.features,.steps,.side{grid-template-columns:1fr}.hero{padding:31px 21px}h1{font-size:39px}.section-head{align-items:start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="orb one"></div><div class="orb two"></div>
+<div class="shell">
+  <header class="topbar glass">
+    <div class="brand"><div class="logo">O</div><div>OptiLauncher <small>— Minecraft Java Edition</small></div></div>
+    <div class="topright"><span class="pill">Windows 10 / 11</span></div>
+  </header>
+  <div class="layout">
+    <main>
+      <section class="hero glass">
+        <div class="hero-content">
+          <div class="eyebrow">OPTILAUNCHER · DOWNLOAD</div>
+          <h1><span class="gradient-text">Твой Minecraft.</span><br>Твои правила.</h1>
+          <p>Установи OptiLauncher и собери свою идеальную версию Minecraft. Управляй сборками, версиями и модами в одном удобном месте.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://www.dropbox.com/scl/fi/ubowan1aulvbirqcza2j1/OptiLauncher-Setup-0.13.0.exe?rlkey=vw9x94ef920z7bhohhi8unyvi&st=rhekcgi7&e=1&dl=1" onclick="downloadNotice(event)">↓ Скачать OptiLauncher</a>
+            <a class="btn secondary" href="#install">Как установить <span>↗</span></a>
+          </div>
+          <div class="note">Для Windows 10 и Windows 11 · Minecraft Java Edition</div>
+        </div>
+      </section>
+      <div class="section-head"><h2>Всё для комфортной игры</h2><span>OPTILAUNCHER FEATURES</span></div>
+      <section class="features">
+        <article class="feature glass"><div class="ico">▱</div><b>Управление сборками</b><p>Создавай отдельные игровые профили и переключайся между ними.</p></article>
+        <article class="feature glass"><div class="ico">◇</div><b>Моды и загрузчики</b><p>Подготавливай сборки с поддержкой популярных загрузчиков модов.</p></article>
+        <article class="feature glass"><div class="ico">↻</div><b>Удобные обновления</b><p>Все важные настройки и версии собраны в одном интерфейсе.</p></article>
+      </section>
+      <div class="section-head" id="install"><h2>Быстрая установка</h2><span>ВСЕГО 3 ШАГА</span></div>
+      <section class="steps">
+        <article class="step glass"><div class="step-num">ШАГ 01</div><b>Скачай установщик</b><p>Нажми кнопку скачивания и сохрани файл OptiLauncher на компьютер.</p></article>
+        <article class="step glass"><div class="step-num">ШАГ 02</div><b>Запусти установку</b><p>Открой скачанный файл и следуй инструкциям установщика Windows.</p></article>
+        <article class="step glass"><div class="step-num">ШАГ 03</div><b>Войди и играй</b><p>Открой лаунчер, настрой профиль и запускай Minecraft.</p></article>
+      </section>
+      <section class="faq">
+        <div class="section-head"><h2>Частые вопросы</h2><span>ПОМОЩЬ</span></div>
+        <details><summary>Какая Windows поддерживается?</summary><p>Страница рассчитана на Windows 10 и Windows 11. Совместимость самого лаунчера зависит от его сборки.</p></details>
+        <details><summary>Нужен ли лицензионный аккаунт?</summary><p>Для официальной авторизации Microsoft потребуется соответствующий Minecraft-аккаунт. Используй официальный способ входа.</p></details>
+        <details><summary>Куда сообщить об ошибке?</summary><p>Добавь сюда ссылку на свой Discord-сервер или страницу поддержки проекта.</p></details>
+      </section>
+    </main>
+    <aside class="side">
+      <section class="sidecard glass">
+        <div class="side-label">ТЕКУЩИЙ РЕЛИЗ</div><div class="version">OptiLauncher</div><div class="muted">Minecraft Java Edition</div>
+        <span class="tag">WINDOWS</span><span class="tag">JAVA</span><div class="divider"></div>
+        <div class="status"><i class="dot"></i>Страница загрузки готова</div>
+      </section>
+      <section class="sidecard glass">
+        <div class="side-label">СИСТЕМНЫЕ ТРЕБОВАНИЯ</div><div class="version">Windows 10+</div><div class="muted">64-bit · Подключение к интернету</div>
+        <div class="divider"></div><div class="muted">Для запуска Minecraft могут потребоваться дополнительные компоненты Java.</div>
+      </section>
+      <section class="sidecard glass">
+        <div class="side-label">НУЖНА ПОМОЩЬ?</div><div class="version">Мы на связи</div><div class="muted">Не получается установить лаунчер? Добавь ссылку на сообщество или поддержку.</div>
+        <div class="divider"></div><a class="side-link" href="#" onclick="supportNotice(event)">Открыть поддержку ↗</a>
+      </section>
+    </aside>
+  </div>
+  <footer><span>© 2026 OptiLauncher. Неофициальный проект.</span><span>Minecraft — товарный знак Mojang Studios.</span></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+function showToast(message){const t=document.getElementById('toast');t.textContent=message;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),4200)}
+function downloadNotice(e){if(e.currentTarget.getAttribute('href')==='#'){e.preventDefault();showToast('Добавь ссылку на установщик: замени href="#" у кнопки скачивания на ссылку своего .exe-файла.')}} 
+function supportNotice(e){if(e.currentTarget.getAttribute('href')==='#'){e.preventDefault();showToast('Добавь ссылку на Discord или страницу поддержки проекта.')}}
+</script>
+</body>
+</html>
